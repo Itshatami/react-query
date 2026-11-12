@@ -1,19 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 function HomePage() {
-  const fetchUsers = () => {
-    return axios.get("https://fakestoreapi.com/users");
-  };
-  const { data, isLoading, error, isError } = useQuery(["users"], fetchUsers);
-  console.log({ data, isLoading, isError, error });
-  if (isLoading) return <h1>Loading...</h1>;
-  if (isError) return <h1>Something went Wrong - {error.message}</h1>;
   return (
     <div>
-      {data.data.map((user) => (
-        <p>{user.username}</p>
-      ))}
+      <Link to="/users">Users</Link>
     </div>
   );
 }
