@@ -3,7 +3,7 @@ import axios from "axios";
 
 function HomePage() {
   const fetchUsers = () => {
-    return axios.get("https://fakestoreapi.com/user");
+    return axios.get("https://fakestoreapi.com/users");
   };
   const { data, isLoading, error, isError } = useQuery(["users"], fetchUsers);
   console.log({ data, isLoading, isError, error });
