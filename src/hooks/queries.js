@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const useUsersData = () => {
@@ -25,4 +25,11 @@ const useUserDetails = (id) => {
   return useQuery(["users", id], fetchUserDetails);
 };
 
-export { useUserDetails, useUsersData };
+const useAddPost = () => {
+  const addPost = (data) => {
+    return axios.post("https://fakestoreapi.com/users", data);
+  };
+  return useMutation(addPost);
+};
+
+export { useUserDetails, useUsersData, useAddPost };
