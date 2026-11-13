@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function UsersPage() {
   const fetchUsers = () => {
@@ -7,8 +8,8 @@ function UsersPage() {
     return axios.get("https://fakestoreapi.com/users");
   };
 
-  const onSuccess = (data) => console.log("success", data);
-  const onError = (error) => console.log("error", error);
+  // const onSuccess = (data) => console.log("success", data);
+  // const onError = (error) => console.log("error", error);
 
   const { data, isLoading, error, isError, refetch } = useQuery(["users"], fetchUsers, {
     // cacheTime: 5000,
@@ -17,8 +18,8 @@ function UsersPage() {
     // refetchOnWindowFocus:false
     // refetchInterval: 2 * 1000,
     // enabled:false,
-    onSuccess,
-    onError,
+    // onSuccess,
+    // onError,
   });
   console.log({ data, isLoading, isError, error });
 
@@ -28,7 +29,9 @@ function UsersPage() {
       {isError && <h4>Something went Wrong - {error.message}</h4>}
       <button onClick={refetch}>Refetch</button>
       {data?.data.map((user) => (
-        <p key={user.id}>{user.username}</p>
+        <Link key={user.id} to={`/users/${user.id}`}>
+          <h3>{user.username}</h3>
+        </Link>
       ))}
     </div>
   );
