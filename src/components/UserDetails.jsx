@@ -1,20 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useUserDetails } from "../hooks/queries";
 
 function UserDetails() {
   const { id } = useParams();
-  const fetchUserDetails = ({ queryKey }) => {
-    return axios.get(`https://fakestoreapi.com/users/${queryKey[1]}`);
-  };
-
-  const { data } = useQuery(["users", id], fetchUserDetails);
+  const { data } = useUserDetails(id);
   console.log(data);
 
   return (
     <div>
-      <h4>{data.data.username}</h4>
-      <h4>{data.data.email}</h4>
+      <h4>userDetails - {id}</h4>
     </div>
   );
 }
